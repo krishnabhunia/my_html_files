@@ -135,17 +135,13 @@
             </td>
         </tr>
 	<tr>
-            <td id = 'remove_and_recreate'>###docker rm -f $(###docker ps -a -q) && ###docker rmi -f $(###docker images -a -q) && ###docker compose -f docker-compose.yml up -d --build</td>
+            <td id = 'remove_and_recreate'>docker rmi -f $(docker images -a -q) && docker rm -f $(docker ps -a -q) && docker compose -f docker-compose.yml up -d --build</td>
             <td>
                 <button onclick="copyToClipboard('remove_and_recreate')">Copy Text</button>
 		<button onclick="copyToClipboard('remove_and_recreate',false, true, 'docker compose')">Copy Text With Sudo</button>
-		    <br />
-		<button onclick="copyToClipboard_org('remove_and_recreate', true, '###', '')">Copy Text</button>
-		<button onclick="copyToClipboard_org('remove_and_recreate', true, '###', 'sudo ')">Copy Text With Sudo</button>
             </td>
         </tr>
-
-		<tr>
+	<tr>
             <td id = 'az login'>az login --use-device-code</td>
             <td>
                 <button onclick="copyToClipboard('az login')">Copy Text</button>
