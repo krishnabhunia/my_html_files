@@ -113,7 +113,7 @@
                 </td>
             </tr>
         <tr>
-            <td id = 'login'>az acr login -n acrci3415437dev01</td>
+            <td id = 'login'>docker compose down all && docker compose -f docker-compose.yml up -d --build</td>
             <td>
                 <button onclick="copyToClipboard('login')">Copy Text</button>
                 <button onclick="copyToClipboard('login',true)">Copy Text With Sudo</button>
@@ -124,6 +124,13 @@
             <td>
                 <button onclick="copyToClipboard('compose')">Copy Text</button>
 				<button onclick="copyToClipboard('compose',true)">Copy Text With Sudo</button>
+            </td>
+        </tr>
+	<tr>
+            <td id = 'uvicorn'>uvicorn app.main:app --reload</td>
+		<span>uvicorn [folder].[file_name]:app --reload</span>
+            <td>
+                <button onclick="copyToClipboard('uvicorn')">Copy Text</button>
             </td>
         </tr>
         <tr>
