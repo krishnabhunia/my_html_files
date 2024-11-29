@@ -131,14 +131,14 @@
 		
             <td>
                 <button onclick="copyToClipboard('uvicorn')">Copy Text</button>
-		<h6><span>uvicorn [folder].[file_name]:app --reload</span></h6>
+		<h6>uvicorn [folder].[file_name]:app --reload</h6>
             </td>
         </tr>
         <tr>
             <td id = 'remove'>docker compose down --rmi all</td>
             <td>
                 <button onclick="copyToClipboard('remove')">Copy Text</button>
-				<button onclick="copyToClipboard('remove',true)">Copy Text With Sudo</button>
+		<button onclick="copyToClipboard('remove',true)">Copy Text With Sudo</button>
             </td>
         </tr>
 	<tr>
@@ -152,35 +152,35 @@
             <td id = 'az login'>az login --use-device-code</td>
             <td>
                 <button onclick="copyToClipboard('az login')">Copy Text</button>
-				<button onclick="copyToClipboard('az login',true)">Copy Text With Sudo</button>
+		<button onclick="copyToClipboard('az login',true)">Copy Text With Sudo</button>
             </td>
         </tr>
         <tr>
             <td id = 'force remove container'>docker rm -f $(docker ps -a -q)</td>
             <td>
                 <button onclick="copyToClipboard('force remove container')">Copy Text</button>
-				<button onclick="copyToClipboard('force remove container',false, true, 'docker')">Copy Text With Sudo</button>
+		<button onclick="copyToClipboard('force remove container',false, true, 'docker')">Copy Text With Sudo</button>
             </td>
         </tr>
 		<tr>
             <td id = 'force remove container and images'>docker rm -f $(docker ps -a -q) && docker rmi -f $(docker images -a -q)</td>
             <td>
                 <button onclick="copyToClipboard('force remove container and images')">Copy Text</button>
-				<button onclick="copyToClipboard('force remove container and images',false, true, 'docker')">Copy Text With Sudo</button>
+		<button onclick="copyToClipboard('force remove container and images',false, true, 'docker')">Copy Text With Sudo</button>
             </td>
         </tr>
 		<tr>
             <td id = 'contextualization logs in Dev'>docker logs -f sud-leakers-contextualization</td>
             <td>
                 <!-- <button onclick="copyToClipboard('contextualization logs in Dev')">Copy Text</button> -->
-				<button onclick="copyToClipboard('contextualization logs in Dev',true)">Copy Text With Sudo</button>
+		<button onclick="copyToClipboard('contextualization logs in Dev',true)">Copy Text With Sudo</button>
             </td>
         </tr>
 		<tr>
             <td id = 'Error Grep in Dev'>docker logs -f sud-leakers-contextualization 2>&1 | grep -i "error"</td>
             <td>
                 <!-- <button onclick="copyToClipboard('Error Grep in Dev')">Copy Text</button> -->
-				<button onclick="copyToClipboard('Error Grep in Dev',true)">Copy Text With Sudo</button>
+		<button onclick="copyToClipboard('Error Grep in Dev',true)">Copy Text With Sudo</button>
             </td>
         </tr>
 
@@ -188,21 +188,21 @@
             <td id = 'Error Grep'>python -m main 2>&1 | grep -i "error"</td>
             <td>
                 <button onclick="copyToClipboard('Error Grep')">Copy Text</button>
-				<!-- <button onclick="copyToClipboard('Error Grep',true)">Copy Text With Sudo</button> -->
+		<!-- <button onclick="copyToClipboard('Error Grep',true)">Copy Text With Sudo</button> -->
             </td>
         </tr>
 		<tr>
             <td id = 'contextualization'>sud-leakers-contextualization</td>
             <td>
                 <button onclick="copyToClipboard('contextualization')">Copy Text</button>
-				<!-- <button onclick="copyToClipboard('Error Grep',true)">Copy Text With Sudo</button> -->
+		<!-- <button onclick="copyToClipboard('Error Grep',true)">Copy Text With Sudo</button> -->
             </td>
         </tr>
 		<tr>
             <td id = 'data-simulator'>sud-leakers-data-simulator</td>
             <td>
                 <button onclick="copyToClipboard('data-simulator')">Copy Text</button>
-				<!-- <button onclick="copyToClipboard('Error Grep',true)">Copy Text With Sudo</button> -->
+		<!-- <button onclick="copyToClipboard('Error Grep',true)">Copy Text With Sudo</button> -->
             </td>
         </tr>
 		</h3>
