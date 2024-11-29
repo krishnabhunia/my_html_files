@@ -1,0 +1,206 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Copy Text to Clipboard</title>
+    <script>
+        function copyToClipboard(id, sudo = false, placeholder = false, place_holder_text = '') {
+            // Get the text to copy
+            var textToCopy = document.getElementById(id).innerText;
+
+            // Optionally prepend "sudo"
+            if (sudo) {
+                textToCopy = "sudo " + textToCopy;
+            }
+
+            if(placeholder){
+                textToCopy = textToCopy.replace(new RegExp(place_holder_text,'g'),'sudo '+ place_holder_text);
+            }
+
+            // Use the modern Clipboard API
+            navigator.clipboard.writeText(textToCopy)
+                .then(function () {
+                    // Provide some feedback (optional)
+                    document.getElementById('copied').innerText = "Text Copied: " + textToCopy;
+                })
+                .catch(function (err) {
+                    console.error('Unable to copy to clipboard', err);
+                    // Handle the error if needed
+                });
+        }
+	
+	function copyToClipboard_org(id, placeholder = false, replace_text = '###', new_text = '') {
+            // Get the text to copy
+            var textToCopy = document.getElementById(id).innerText;
+
+            if(placeholder){
+                textToCopy = textToCopy.replace(new RegExp(replace_text,'g'),new_text);
+            }
+
+            // Use the modern Clipboard API
+            navigator.clipboard.writeText(textToCopy)
+                .then(function () {
+                    // Provide some feedback (optional)
+                    document.getElementById('copied').innerText = "Text Copied: " + textToCopy;
+                })
+                .catch(function (err) {
+                    console.error('Unable to copy to clipboard', err);
+                    // Handle the error if needed
+                });
+        }
+    </script>
+	<style>
+        table {
+            border-collapse: collapse;
+			font-size: 24px;
+        }
+
+        th, td, th {
+            border: 3px solid #999;
+            padding: 8px;
+            text-align: left;
+			border-collapse:collapse;
+        }
+
+        th {
+            background-color: #f2f2f2;
+			text-align: center;
+        }
+		
+		tr.header {
+			cursor:pointer;
+		}
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 8px 16px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+		h3{
+		font-size:24px;
+		}
+    </style>
+
+</head>
+
+<body>
+<div>
+        <h3>
+            <span id="copied">Text Copied : </span>
+        </h3>
+    </div>
+    <table>
+	
+        <tr>
+            <th>Command</th>
+            <th>Action</th>
+        </tr>
+		<h3>
+            <tr>
+                <td id = 'one_cmd'>###az acr login -n acrci3415437dev01 && ###docker compose down --rmi all && ###docker compose -f docker-compose.yml up -d --build</td>
+                <td>
+                    <button onclick="copyToClipboard_org('one_cmd',true, '###', '')">Copy Text</button>
+                    <button onclick="copyToClipboard_org('one_cmd',true, '###', 'sudo ')">Copy Text With Sudo</button>
+                </td>
+            </tr>
+        <tr>
+            <td id = 'login'>az acr login -n acrci3415437dev01</td>
+            <td>
+                <button onclick="copyToClipboard('login')">Copy Text</button>
+                <button onclick="copyToClipboard('login',true)">Copy Text With Sudo</button>
+            </td>
+        </tr>
+        <tr>
+            <td id = 'compose'>docker compose -f docker-compose.yml up -d --build</td>
+            <td>
+                <button onclick="copyToClipboard('compose')">Copy Text</button>
+				<button onclick="copyToClipboard('compose',true)">Copy Text With Sudo</button>
+            </td>
+        </tr>
+        <tr>
+            <td id = 'remove'>docker compose down --rmi all</td>
+            <td>
+                <button onclick="copyToClipboard('remove')">Copy Text</button>
+				<button onclick="copyToClipboard('remove',true)">Copy Text With Sudo</button>
+            </td>
+        </tr>
+	<tr>
+            <td id = 'remove_and_recreate'>docker compose down --rmi all && docker compose -f docker-compose.yml up -d --build</td>
+            <td>
+                <button onclick="copyToClipboard('remove_and_recreate')">Copy Text</button>
+		<button onclick="copyToClipboard('remove_and_recreate',false, true, 'docker compose')">Copy Text With Sudo</button>
+            </td>
+        </tr>
+	<tr>
+            <td id = 'az login'>az login --use-device-code</td>
+            <td>
+                <button onclick="copyToClipboard('az login')">Copy Text</button>
+				<button onclick="copyToClipboard('az login',true)">Copy Text With Sudo</button>
+            </td>
+        </tr>
+        <tr>
+            <td id = 'force remove container'>docker rm -f $(docker ps -a -q)</td>
+            <td>
+                <button onclick="copyToClipboard('force remove container')">Copy Text</button>
+				<button onclick="copyToClipboard('force remove container',false, true, 'docker')">Copy Text With Sudo</button>
+            </td>
+        </tr>
+		<tr>
+            <td id = 'force remove container and images'>docker rm -f $(docker ps -a -q) && docker rmi -f $(docker images -a -q)</td>
+            <td>
+                <button onclick="copyToClipboard('force remove container and images')">Copy Text</button>
+				<button onclick="copyToClipboard('force remove container and images',false, true, 'docker')">Copy Text With Sudo</button>
+            </td>
+        </tr>
+		<tr>
+            <td id = 'contextualization logs in Dev'>docker logs -f sud-leakers-contextualization</td>
+            <td>
+                <!-- <button onclick="copyToClipboard('contextualization logs in Dev')">Copy Text</button> -->
+				<button onclick="copyToClipboard('contextualization logs in Dev',true)">Copy Text With Sudo</button>
+            </td>
+        </tr>
+		<tr>
+            <td id = 'Error Grep in Dev'>docker logs -f sud-leakers-contextualization 2>&1 | grep -i "error"</td>
+            <td>
+                <!-- <button onclick="copyToClipboard('Error Grep in Dev')">Copy Text</button> -->
+				<button onclick="copyToClipboard('Error Grep in Dev',true)">Copy Text With Sudo</button>
+            </td>
+        </tr>
+
+		<tr>
+            <td id = 'Error Grep'>python -m main 2>&1 | grep -i "error"</td>
+            <td>
+                <button onclick="copyToClipboard('Error Grep')">Copy Text</button>
+				<!-- <button onclick="copyToClipboard('Error Grep',true)">Copy Text With Sudo</button> -->
+            </td>
+        </tr>
+		<tr>
+            <td id = 'contextualization'>sud-leakers-contextualization</td>
+            <td>
+                <button onclick="copyToClipboard('contextualization')">Copy Text</button>
+				<!-- <button onclick="copyToClipboard('Error Grep',true)">Copy Text With Sudo</button> -->
+            </td>
+        </tr>
+		<tr>
+            <td id = 'data-simulator'>sud-leakers-data-simulator</td>
+            <td>
+                <button onclick="copyToClipboard('data-simulator')">Copy Text</button>
+				<!-- <button onclick="copyToClipboard('Error Grep',true)">Copy Text With Sudo</button> -->
+            </td>
+        </tr>
+		</h3>
+    </table>
+
+
+</body>
+</html>
