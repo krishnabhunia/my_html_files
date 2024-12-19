@@ -190,23 +190,29 @@
 		<!-- <button onclick="copyToClipboard('Error Grep',true)">Copy Text With Sudo</button> -->
             </td>
         </tr>
-		<tr>
-            <td id = 'contextualization'>sud-leakers-contextualization</td>
+	
+	<tr>
+            <td id = 'docker build'>docker build -t custom-python-image .</td>
             <td>
-                <button onclick="copyToClipboard('contextualization')">Copy Text</button>
-		<!-- <button onclick="copyToClipboard('Error Grep',true)">Copy Text With Sudo</button> -->
+                <button onclick="copyToClipboard('docker build')">Copy Text</button>
+		<button onclick="copyToClipboard('docker build',true)">Copy Text With Sudo</button>
             </td>
         </tr>
-		<tr>
-            <td id = 'data-simulator'>sud-leakers-data-simulator</td>
+	<tr>
+            <td id = 'docker run'>docker run -dit --name custom-container-name custom-python-image</td>
             <td>
-                <button onclick="copyToClipboard('data-simulator')">Copy Text</button>
-		<!-- <button onclick="copyToClipboard('Error Grep',true)">Copy Text With Sudo</button> -->
+                <button onclick="copyToClipboard('docker run')">Copy Text</button>
+		<button onclick="copyToClipboard('docker run',true)">Copy Text With Sudo</button>
             </td>
         </tr>
-		</h3>
+	<tr>
+            <td id = 'docker exec'>docker exec -it custom-container-name bash</td>
+            <td>
+                <button onclick="copyToClipboard('docker exec')">Copy Text</button>
+		<button onclick="copyToClipboard('docker exec',true)">Copy Text With Sudo</button>
+            </td>
+        </tr>
+	</h3>
     </table>
-
-
 </body>
 </html>
