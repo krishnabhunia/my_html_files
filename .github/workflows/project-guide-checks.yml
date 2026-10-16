@@ -1,0 +1,30 @@
+name: Project documentation and source checks
+on:
+  pull_request:
+    branches: [main]
+permissions:
+  contents: read
+jobs:
+  docs:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Validate documentation
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import re,urllib.parse
+          s=Path("docs/PROJECT_GUIDE.md").read_text()
+          assert s.count("~~~")%2==0 and s.count("~~~mermaid")>=3
+          assert "docs/PROJECT_GUIDE.md" in Path("README.md").read_text(encoding="utf-8-sig")
+          for t in re.findall(r"\]\(([^)]+)\)",s):
+           target=t.split("#")[0].split("?")[0]
+           if target and not target.startswith(("https://","http://","#")): assert (Path("docs")/urllib.parse.unquote(target)).exists(),target
+          print("README links and Mermaid passed")
+          PY
+      - name: Source smoke test
+        run: python -c "from html.parser import HTMLParser; from pathlib import Path; parser=HTMLParser(); [parser.feed(p.read_text()) for p in Path('.').glob('*.html')]; print('HTML parsed')"
+
